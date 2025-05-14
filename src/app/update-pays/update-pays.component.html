@@ -1,0 +1,54 @@
+<div class="container">
+  <div>
+    <h2>Modifier un Pays :</h2>
+  </div>
+
+  <form (ngSubmit)="updatePays()">
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>ID Pays</label>
+      <input readonly type="number" [(ngModel)]="currentPays.idPays" name="idPays" class="form-control">
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Nom Pays</label>
+      <input type="text" [(ngModel)]="currentPays.nomPays" name="nomPays" class="form-control">
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <label>Population</label>
+      <input type="number" [(ngModel)]="currentPays.population" name="population" class="form-control">
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Continent</label>
+      <input type="text" [(ngModel)]="currentPays.continent" name="continent" class="form-control">
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Date d'Indépendance</label>
+      <input
+        type="date"
+        [ngModel]="currentPays.independenceDate | date:'yyyy-MM-dd'"
+        (ngModelChange)="currentPays.independenceDate = $event"
+        name="independenceDate"
+        class="form-control"
+      >
+    </div>
+
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <label>Classification</label>
+      <select class="form-control form-control-lg" id="idClass" name="idClass" [(ngModel)]="updateClassId">
+        @for(classification of classifications; track classification.idClass)
+        {
+          <option [value]="classification.idClass">{{ classification.nomClass }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="mt-2">
+      <button type="submit" class="btn btn-success">Modifier</button>
+    </div>
+  </form>
+</div>
+
+

@@ -1,0 +1,54 @@
+<div class="container">
+  <!-- Dropdown list for classifications -->
+  <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+    <label>Classifications</label>
+    <select class="form-control form-control-lg" id="idClassification" name="idClassification"
+      [(ngModel)]="idClass" (change)="onChange()">
+      <option [ngValue]="null" disabled selected>-- Choisir une classification --</option>
+      @for (classification of classifications; track classification.idClass) {
+        <option [ngValue]="classification.idClass">
+          {{ classification.nomClass }}
+        </option>
+      }
+    </select>
+  </div>
+
+  <!-- Table displaying filtered pays -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Population</th>
+            <th>Date d'indépendance</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of pays; track p.idPays) {
+            <tr>
+              <td>{{ p.idPays }}</td>
+              <td>{{ p.nomPays }}</td>
+              <td>{{ p.population }}</td>
+              <td>{{ p.independenceDate | date: 'dd/MM/yyyy' }}</td>
+              @if (p.classification) {
+                <td>{{ p.classification.nomClass }}</td>
+              } @else {
+                <td>PAS DE CLASSIFICATION</td>
+              }
+            </tr>
+          }
+          @empty {
+            <tr>
+              <td colspan="5" class="text-center">Aucun pays trouvé pour cette classification.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

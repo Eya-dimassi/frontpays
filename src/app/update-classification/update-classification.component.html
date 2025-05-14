@@ -1,0 +1,16 @@
+<form>
+    <div [hidden]="ajout" >
+    <label>ID Classification</label>
+<input type="text" [readonly]="!ajout"  [(ngModel)]="classification.idClass" name="idClass" class="form-control w-25">
+    </div>
+    <div>
+    <label>Nom Classification</label>
+    <input type="text" [(ngModel)]="classification.nomClass" name="nomClass" class="form-control"
+    placeholder="Entrez un nom du classifications...">
+    </div>
+    <div class="mt-2">
+     <button type="submit" [disabled]="!classification.nomClass" class="btn btn-success"
+    (click)="saveClassification()" >{{ajout ? 'Ajouter' : 'Modifier'}}</button>
+    
+    </div>
+</form>

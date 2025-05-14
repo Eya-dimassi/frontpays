@@ -1,0 +1,56 @@
+<div class="container">
+  <!-- Live search by nomPays -->
+  <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2 mt-2">
+      <label>Nom du pays en tapant</label>
+      <input
+        #nom
+        [(ngModel)]="searchTerm"
+        name="searchTerm"
+        class="form-control"
+      />
+    </div>
+  </form>
+
+  <!-- Table displaying filtered pays -->
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom Pays</th>
+            <th>Population</th>
+            <th>Continent</th>
+            <th>Date d'indépendance</th>
+            <th>Classification</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of pays | searchFilter: searchTerm; track p.idPays) {
+            <tr>
+              <td>{{ p.idPays }}</td>
+              <td>{{ p.nomPays }}</td>
+              <td>{{ p.population }}</td>
+              <td>{{ p.continent }}</td>
+              <td>{{ p.independenceDate| date: 'dd/MM/yyyy' }}</td>
+              @if (p.classification) {
+                <td>{{ p.classification.nomClass }}</td>
+              } @else {
+                <td>PAS DE CLASSIFICATION</td>
+              }
+            </tr>
+          }
+
+          @empty {
+            <tr>
+              <td colspan="5" class="text-center">Aucun pays trouvé !</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

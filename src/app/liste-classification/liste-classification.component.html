@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+
+      <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
+        <app-update-classification
+          [classification]="updatedClass"
+          (classificationUpdated)="classUpdated($event)"
+          [ajout]="ajout">
+        </app-update-classification>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom Classification</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cl of classifications; track cl.idClass) {
+            <tr>
+              <td>{{ cl.idClass }}</td>
+              <td>{{ cl.nomClass }}</td>
+              <td>
+                <a class="btn btn-success" (click)="updateClass(cl)">Editer</a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
