@@ -34,22 +34,22 @@
             <li><a class="dropdown-item" routerLink="/pays">Lister</a></li>
            <li> <a class="dropdown-item"  routerLink="/rechercheParClassification" >Recherche Par Classification</a></li>
             <li><a class="dropdown-item"  routerLink="/rechercheParNom" >Recherche Par Nom</a></li>
-            <li> <a class="dropdown-item" routerLink="/ListeClassification" >Gestion des classifications</a></li>
+            <li> <a class="dropdown-item" routerLink="/listeClassifications" >Gestion des classifications</a></li>
           </ul>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto m-2">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 [{{authService.loggedUser}}]
 </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             @if(!authService.isloggedIn){
-            <li><a class="dropdown-item" href="#">Login</a></li>}
+              <li><a class="dropdown-item"routerLink="/login">Login</a></li>
+            }
             @else {
-
-            <li><a class="dropdown-item" href="#">Logout</a></li>}
+              <li><a class="dropdown-item"   (click) = "onLogout()">Logout</a></li>
+            }
             <li><a class="dropdown-item" href="#">Profile</a></li>
           </ul>
         </li>

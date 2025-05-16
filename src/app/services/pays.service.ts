@@ -4,6 +4,7 @@ import { Classification } from '../model/classification.model';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ClassificationWrapper } from '../model/classificationWrapped.model';
+import { AuthService } from './auth.service';
 const httpOptions = {
 headers: new HttpHeaders( {'Content-Type': 'application/json'} )
 };
@@ -16,34 +17,49 @@ pays!: Pays[];
 p!:Pays;
 classifications:Classification[]=[];
  apiURL :string = 'http://localhost:8082/pays/api'; 
- apiURLClass: string = 'http://localhost:8082/class';
-constructor(private http: HttpClient) {}
+ apiURLClass: string = 'http://localhost:8082/pays';
+constructor(private http: HttpClient,private authService : AuthService,) {}
 
 
   listePays(): Observable<Pays[]> {
-    return this.http.get<Pays[]>(this.apiURL);
+    /*let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})*/
+    return this.http.get<Pays[]>(this.apiURL+"/all");
   }
 
   // Ajouter un pays
   ajouterPays(p: Pays): Observable<Pays> {
-    return this.http.post<Pays>(this.apiURL, p, httpOptions);
+    /*let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})*/
+    return this.http.post<Pays>(this.apiURL+"/addpays", p);
   }
 
   // Supprimer un pays par ID
   supprimerPays(id: number): Observable<void> {
-    const url = `${this.apiURL}/${id}`;
-    return this.http.delete<void>(url, httpOptions);
+    const url = `${this.apiURL}/delpays/${id}`;
+    /*let jwt = this.authService.getToken();
+jwt = "Bearer "+jwt;
+let httpHeaders = new HttpHeaders({"Authorization":jwt})*/
+    return this.http.delete<void>(url);
   }
 
   // Consulter un pays par ID
   consulterPays(id: number): Observable<Pays> {
-    const url = `${this.apiURL}/${id}`;
+    const url = `${this.apiURL}/getbyid/${id}`;
+    /*et jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt})*/
     return this.http.get<Pays>(url);
   }
 
 
   updatePays(p: Pays): Observable<Pays> {
-    return this.http.put<Pays>(this.apiURL, p, httpOptions);
+    /*let jwt = this.authService.getToken();
+jwt = "Bearer "+jwt;
+let httpHeaders = new HttpHeaders({"Authorization":jwt}) */
+    return this.http.put<Pays>(this.apiURL+"/updatepays", p);
   }
 
   // Rechercher un pays par nom
@@ -59,7 +75,10 @@ constructor(private http: HttpClient) {}
   }
 
   listeClassification(): Observable<ClassificationWrapper> {
-    return this.http.get<ClassificationWrapper>(this.apiURLClass);
+    /*let jwt = this.authService.getToken();
+jwt = "Bearer "+jwt;
+let httpHeaders = new HttpHeaders({"Authorization":jwt})*/
+    return this.http.get<ClassificationWrapper>(this.apiURLClass+"/class");
   }
   rechercherParClassification(idClass: number): Observable<Pays[]> {
   const url = `${this.apiURLClass}/paysclass/${idClass}`; 

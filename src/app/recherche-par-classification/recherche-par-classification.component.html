@@ -2,8 +2,8 @@
   <!-- Dropdown list for classifications -->
   <div class="col-sm-4 col-md-4 col-lg-4 mb-4">
     <label>Classifications</label>
-    <select class="form-control form-control-lg" id="idClassification" name="idClassification"
-      [(ngModel)]="idClass" (change)="onChange()">
+    <select class="form-control form-control-lg" id="idClass" name="idClass"
+      [(ngModel)]="IdClass" (change)="onChange()">
       <option [ngValue]="null" disabled selected>-- Choisir une classification --</option>
       @for (classification of classifications; track classification.idClass) {
         <option [ngValue]="classification.idClass">
@@ -40,11 +40,7 @@
               }
             </tr>
           }
-          @empty {
-            <tr>
-              <td colspan="5" class="text-center">Aucun pays trouvé pour cette classification.</td>
-            </tr>
-          }
+          
         </tbody>
       </table>
     </div>

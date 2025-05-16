@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class RechercheParClassificationComponent implements OnInit {
   pays!:Pays[] ;
   classifications!:Classification[];
-  idClass!:number;
+  IdClass!:number;
 
   constructor(private paysService:PaysService){}
 
@@ -27,7 +27,7 @@ export class RechercheParClassificationComponent implements OnInit {
   }
   onChange(){
    
-    this.paysService.rechercherParClassification(this.idClass).subscribe(p =>{this.pays=p});
+    this.paysService.rechercherParClassification(this.IdClass).subscribe(p =>{this.pays=p});
 
   }
 

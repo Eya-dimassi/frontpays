@@ -3,18 +3,19 @@ import { Classification } from '../model/classification.model';
 import { PaysService } from '../services/pays.service';
 import { CommonModule } from '@angular/common';
 import { UpdateClassificationComponent } from '../update-classification/update-classification.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-liste-classification',
   standalone: true,
-  imports: [CommonModule,UpdateClassificationComponent],
+  imports: [CommonModule,UpdateClassificationComponent,FormsModule],
   templateUrl: './liste-classification.component.html',
   styles: ``
 })
 export class ListeClassificationComponent implements OnInit {
 classifications!: Classification[];
 ajout:boolean=true;
-updatedClass:Classification = {"idClass":0,"nomClass":""};
+updatedClass:Classification = {"idClass":null,"nomClass":""};
 
 constructor(private paysService: PaysService) { }
 

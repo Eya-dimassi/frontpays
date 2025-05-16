@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -11,15 +11,15 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit{
   title = 'pays-front';
-  constructor(public authService: AuthService){}
+  constructor(public authService: AuthService,private router:Router){}
   ngOnInit () {
-let isloggedin: string;
-let loggedUser:string;
-isloggedin = localStorage.getItem('isloggedIn') !;
-loggedUser = localStorage.getItem('loggedUser') !;
-if (isloggedin!="true" || !loggedUser)
-this.router.navigate(['/login']);
-else
-this.authService.setLoggedUserFromLocalStorage(loggedUser);
+this.authService.loadToken();
+if (this.authService.getToken()==null ||
+ this.authService.isTokenExpired())
+     this.router.navigate(['/login']);
 }
+onLogout(){
+    console.log("logout-------1");
+    this.authService.logout();
+  }
 }

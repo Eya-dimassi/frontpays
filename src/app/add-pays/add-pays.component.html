@@ -3,9 +3,9 @@
     <h2>Ajouter un Pays :</h2>
   </div>
   <form>
-    <div class="col-sm-2 col-md-2 col-lg-2">
+    <div hidden class="col-sm-2 col-md-2 col-lg-2">
       <label>ID Pays</label>
-      <input [hidden] type="number" [(ngModel)]="newPays.idPays" name="idPays" class="form-control" required>
+      <input  type="number" [(ngModel)]="newPays.idPays" name="idPays" class="form-control" required>
     </div>
     <div class="col-sm-4 col-md-4 col-lg-4">
       <label>Nom Pays</label>
@@ -26,9 +26,10 @@
     <div class="col-sm-4 col-md-4 col-lg-4">
   <label>Classification</label>
 <select class="form-control form-control-lg" id="idClass" name="idClass" [(ngModel)]="newIdClass">
-  @for ( cl of classifications; track cl.idClass ){
-    <option [value]="cl.idClass">{{ cl.nomClass }}</option>
-  }
+  @for(classification of classifications; track classification.idClass)
+        {
+          <option [value]="classification.idClass">{{ classification.nomClass }}</option>
+        }
 </select>
 
 
